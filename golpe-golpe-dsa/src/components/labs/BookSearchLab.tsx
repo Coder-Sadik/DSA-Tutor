@@ -7,7 +7,7 @@ import { getDictionary, formatNumber } from '@/lib/i18n/dictionaries';
 import { linearSearchSteps, binarySearchSteps, SearchStep } from '@/lib/algorithms/search';
 import { LabWrapper } from './LabWrapper';
 import { StepPlayer } from './StepPlayer';
-import { BookOpen, Sparkles, Check, X, Search } from 'lucide-react';
+import { Sparkles, Check, X, Search } from 'lucide-react';
 
 interface BookSearchLabProps {
   lang: Locale;
@@ -29,15 +29,12 @@ export function BookSearchLab({ lang }: BookSearchLabProps) {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(-1);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [speed, setSpeed] = useState<number>(700);
-  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   // Playback timer ref
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Client-side hydration safety
   useEffect(() => {
-    setIsMounted(true);
-    // Deterministic on SSR, random on client after mount if desired
+    // Client-side hydration safety
   }, []);
 
   // Pick a new random target and shuffle the heap
@@ -225,7 +222,7 @@ export function BookSearchLab({ lang }: BookSearchLabProps) {
           </div>
 
           {/* Book Cards Grid */}
-          <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
+          <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
             {heapBooks.map((bookNum, idx) => {
               const isChecking = activeMode === 'heap' && currentStep?.currentIndex === idx;
               const isFound = isChecking && currentStep?.status === 'found';
@@ -233,38 +230,50 @@ export function BookSearchLab({ lang }: BookSearchLabProps) {
                 activeMode === 'heap' && currentStep?.discardedIndices.includes(idx);
 
               return (
-                <motion.div
-                  key={`heap-${idx}-${bookNum}`}
-                  layout={!shouldReduceMotion}
-                  animate={
-                    isChecking
-                      ? { scale: shouldReduceMotion ? 1 : 1.08, y: shouldReduceMotion ? 0 : -4 }
-                      : { scale: 1, y: 0 }
-                  }
-                  transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
-                  className={`relative p-2 rounded-lg text-center border font-mono font-bold text-sm select-none transition-colors min-h-[52px] flex flex-col items-center justify-center ${
-                    isFound
-                      ? 'bg-emerald-500 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400'
-                      : isChecking
-                      ? 'bg-[#E11D48] text-white border-[#BE123C] shadow-md ring-2 ring-[#FDA4AF]'
-                      : isDiscarded
-                      ? 'bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500 border-gray-200 dark:border-gray-700 opacity-60'
-                      : 'bg-[var(--bg-page)] text-[var(--text-ink)] border-[var(--border-line)] hover:border-[var(--brand-teal)]'
-                  }`}
-                >
-                  <span className="text-xs opacity-75 font-sans font-normal">
+                <div key={`heap-col-${idx}-${bookNum}`} className="flex flex-col items-center">
+                  {/* Small separate position index label with aria-label */}
+                  <span
+                    className="text-[11px] font-mono text-[var(--text-muted)] mb-1 select-none"
+                    aria-label={
+                      lang === 'bn'
+                        ? `অবস্থান ${formatNumber(idx + 1, lang)}`
+                        : `Position ${idx + 1}`
+                    }
+                  >
                     #{formatNumber(idx + 1, lang)}
                   </span>
-                  <span className="text-base font-extrabold">
-                    {formatNumber(bookNum, lang)}
-                  </span>
-                  {isFound && (
-                    <Check className="w-3.5 h-3.5 absolute top-1 right-1" aria-hidden="true" />
-                  )}
-                  {isDiscarded && (
-                    <X className="w-3 h-3 absolute top-1 right-1 opacity-40" aria-hidden="true" />
-                  )}
-                </motion.div>
+
+                  {/* Tile shows ONLY the book number */}
+                  <motion.div
+                    key={`heap-${idx}-${bookNum}`}
+                    layout={!shouldReduceMotion}
+                    animate={
+                      isChecking
+                        ? { scale: shouldReduceMotion ? 1 : 1.08, y: shouldReduceMotion ? 0 : -4 }
+                        : { scale: 1, y: 0 }
+                    }
+                    transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
+                    className={`w-full relative p-2 rounded-lg text-center border font-mono select-none transition-colors min-h-[52px] flex items-center justify-center ${
+                      isFound
+                        ? 'bg-emerald-500 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400'
+                        : isChecking
+                        ? 'bg-[#E11D48] text-white border-[#BE123C] shadow-md ring-2 ring-[#FDA4AF]'
+                        : isDiscarded
+                        ? 'bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500 border-gray-200 dark:border-gray-700 opacity-60'
+                        : 'bg-[var(--bg-page)] text-[var(--text-ink)] border-[var(--border-line)] hover:border-[var(--brand-teal)]'
+                    }`}
+                  >
+                    <span className="text-lg font-extrabold">
+                      {formatNumber(bookNum, lang)}
+                    </span>
+                    {isFound && (
+                      <Check className="w-3.5 h-3.5 absolute top-1 right-1" aria-hidden="true" />
+                    )}
+                    {isDiscarded && (
+                      <X className="w-3 h-3 absolute top-1 right-1 opacity-40" aria-hidden="true" />
+                    )}
+                  </motion.div>
+                </div>
               );
             })}
           </div>
@@ -292,7 +301,7 @@ export function BookSearchLab({ lang }: BookSearchLabProps) {
 
           {/* Book Cards Grid on the Shelf */}
           <div className="relative">
-            <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 pb-2">
+            <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5 pb-2">
               {sortedBooks.map((bookNum, idx) => {
                 const isMid = activeMode === 'shelf' && currentStep?.mid === idx;
                 const isFound = isMid && currentStep?.status === 'found';
@@ -300,38 +309,50 @@ export function BookSearchLab({ lang }: BookSearchLabProps) {
                   activeMode === 'shelf' && currentStep?.discardedIndices.includes(idx);
 
                 return (
-                  <motion.div
-                    key={`shelf-${idx}-${bookNum}`}
-                    layout={!shouldReduceMotion}
-                    animate={
-                      isMid
-                        ? { scale: shouldReduceMotion ? 1 : 1.08, y: shouldReduceMotion ? 0 : -6 }
-                        : { scale: 1, y: 0 }
-                    }
-                    transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
-                    className={`relative p-2 rounded-lg text-center border font-mono font-bold text-sm select-none transition-colors min-h-[52px] flex flex-col items-center justify-center ${
-                      isFound
-                        ? 'bg-emerald-500 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400'
-                        : isMid
-                        ? 'bg-[var(--brand-teal)] text-white border-[#0D655E] shadow-md ring-2 ring-[var(--brand-teal-light)]'
-                        : isDiscarded
-                        ? 'bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500 border-gray-200 dark:border-gray-700 opacity-40'
-                        : 'bg-[var(--bg-page)] text-[var(--text-ink)] border-[var(--border-line)]'
-                    }`}
-                  >
-                    <span className="text-xs opacity-75 font-sans font-normal">
+                  <div key={`shelf-col-${idx}-${bookNum}`} className="flex flex-col items-center">
+                    {/* Small separate position index label with aria-label */}
+                    <span
+                      className="text-[11px] font-mono text-[var(--text-muted)] mb-1 select-none"
+                      aria-label={
+                        lang === 'bn'
+                          ? `তাকের অবস্থান ${formatNumber(idx + 1, lang)}`
+                          : `Shelf position ${idx + 1}`
+                      }
+                    >
                       #{formatNumber(idx + 1, lang)}
                     </span>
-                    <span className="text-base font-extrabold">
-                      {formatNumber(bookNum, lang)}
-                    </span>
-                    {isFound && (
-                      <Check className="w-3.5 h-3.5 absolute top-1 right-1" aria-hidden="true" />
-                    )}
-                    {isMid && !isFound && (
-                      <Search className="w-3 h-3 absolute top-1 right-1 text-white" aria-hidden="true" />
-                    )}
-                  </motion.div>
+
+                    {/* Tile shows ONLY the book number */}
+                    <motion.div
+                      key={`shelf-${idx}-${bookNum}`}
+                      layout={!shouldReduceMotion}
+                      animate={
+                        isMid
+                          ? { scale: shouldReduceMotion ? 1 : 1.08, y: shouldReduceMotion ? 0 : -6 }
+                          : { scale: 1, y: 0 }
+                      }
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
+                      className={`w-full relative p-2 rounded-lg text-center border font-mono select-none transition-colors min-h-[52px] flex items-center justify-center ${
+                        isFound
+                          ? 'bg-emerald-500 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400'
+                          : isMid
+                          ? 'bg-[var(--brand-teal)] text-white border-[#0D655E] shadow-md ring-2 ring-[var(--brand-teal-light)]'
+                          : isDiscarded
+                          ? 'bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500 border-gray-200 dark:border-gray-700 opacity-40'
+                          : 'bg-[var(--bg-page)] text-[var(--text-ink)] border-[var(--border-line)]'
+                      }`}
+                    >
+                      <span className="text-lg font-extrabold">
+                        {formatNumber(bookNum, lang)}
+                      </span>
+                      {isFound && (
+                        <Check className="w-3.5 h-3.5 absolute top-1 right-1" aria-hidden="true" />
+                      )}
+                      {isMid && !isFound && (
+                        <Search className="w-3 h-3 absolute top-1 right-1 text-white" aria-hidden="true" />
+                      )}
+                    </motion.div>
+                  </div>
                 );
               })}
             </div>
@@ -374,4 +395,3 @@ export function BookSearchLab({ lang }: BookSearchLabProps) {
     </LabWrapper>
   );
 }
-

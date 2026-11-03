@@ -3,11 +3,20 @@ import { locales, isValidLocale } from '@/lib/i18n/config';
 import { hindSiliguri, bricolageGrotesque } from '@/lib/fonts';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
+import { SITE_URL } from '@/lib/site';
+import type { Metadata } from 'next';
 import '@/app/globals.css';
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  twitter: {
+    card: 'summary_large_image',
+  },
+};
 
 const themeScript = `
 (function() {
@@ -56,4 +65,3 @@ export default async function LangLayout({
     </html>
   );
 }
-

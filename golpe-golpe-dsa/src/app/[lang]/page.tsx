@@ -4,6 +4,7 @@ import { Locale, isValidLocale, locales } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import { ShelfIllustration } from '@/components/common/ShelfIllustration';
 import { TocList } from '@/components/content/TocList';
+import { SITE_URL } from '@/lib/site';
 import { BookOpen, Sparkles } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -20,25 +21,32 @@ export async function generateMetadata({ params }: CoverPageProps): Promise<Meta
   if (!isValidLocale(lang)) return {};
 
   const dict = getDictionary(lang);
-  const baseUrl = 'https://golpe-golpe-dsa.vercel.app';
+  const title = `${dict.siteTitle} — ${dict.siteTagline}`;
+  const description = dict.siteTagline;
 
   return {
-    title: `${dict.siteTitle} — ${dict.siteTagline}`,
-    description: dict.siteTagline,
+    title,
+    description,
     alternates: {
-      canonical: `${baseUrl}/${lang}`,
+      canonical: `${SITE_URL}/${lang}`,
       languages: {
-        bn: `${baseUrl}/bn`,
-        en: `${baseUrl}/en`,
+        bn: `${SITE_URL}/bn`,
+        en: `${SITE_URL}/en`,
+        'x-default': `${SITE_URL}/bn`,
       },
     },
     openGraph: {
       title: dict.siteTitle,
-      description: dict.siteTagline,
-      url: `${baseUrl}/${lang}`,
+      description,
+      url: `${SITE_URL}/${lang}`,
       siteName: dict.siteTitle,
       locale: lang === 'bn' ? 'bn_BD' : 'en_US',
       type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.siteTitle,
+      description,
     },
   };
 }
@@ -93,4 +101,3 @@ export default async function CoverPage({ params }: CoverPageProps) {
     </div>
   );
 }
-

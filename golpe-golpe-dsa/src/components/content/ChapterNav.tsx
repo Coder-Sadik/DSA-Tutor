@@ -111,3 +111,4 @@ export function ChapterNav({ currentSlug, lang }: ChapterNavProps) {
     </nav>
   );
 }
+

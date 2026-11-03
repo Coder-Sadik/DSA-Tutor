@@ -6,6 +6,7 @@ import { getChapterFileBySlug } from '@/lib/content';
 import { CHAPTERS } from '@/lib/chapters';
 import { MdxRenderer } from '@/components/mdx/MdxRenderer';
 import { ChapterNav } from '@/components/content/ChapterNav';
+import { SITE_URL } from '@/lib/site';
 import { ArrowLeft, BookOpen } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -34,25 +35,32 @@ export async function generateMetadata({ params }: ChapterPageProps): Promise<Me
   if (!chapter) return {};
 
   const dict = getDictionary(lang);
-  const baseUrl = 'https://golpe-golpe-dsa.vercel.app';
+  const title = `${chapter.frontmatter.title} — ${dict.siteTitle}`;
+  const description = chapter.frontmatter.storyHook;
 
   return {
-    title: `${chapter.frontmatter.title} — ${dict.siteTitle}`,
-    description: chapter.frontmatter.storyHook,
+    title,
+    description,
     alternates: {
-      canonical: `${baseUrl}/${lang}/chapter/${slug}`,
+      canonical: `${SITE_URL}/${lang}/chapter/${slug}`,
       languages: {
-        bn: `${baseUrl}/bn/chapter/${slug}`,
-        en: `${baseUrl}/en/chapter/${slug}`,
+        bn: `${SITE_URL}/bn/chapter/${slug}`,
+        en: `${SITE_URL}/en/chapter/${slug}`,
+        'x-default': `${SITE_URL}/bn/chapter/${slug}`,
       },
     },
     openGraph: {
-      title: `${chapter.frontmatter.title} — ${dict.siteTitle}`,
-      description: chapter.frontmatter.storyHook,
-      url: `${baseUrl}/${lang}/chapter/${slug}`,
+      title,
+      description,
+      url: `${SITE_URL}/${lang}/chapter/${slug}`,
       siteName: dict.siteTitle,
       locale: lang === 'bn' ? 'bn_BD' : 'en_US',
       type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
     },
   };
 }
