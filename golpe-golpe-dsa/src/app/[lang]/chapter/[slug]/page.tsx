@@ -5,6 +5,7 @@ import { getDictionary, formatNumber } from '@/lib/i18n/dictionaries';
 import { getChapterFileBySlug } from '@/lib/content';
 import { CHAPTERS } from '@/lib/chapters';
 import { MdxRenderer } from '@/components/mdx/MdxRenderer';
+import { ChapterNav } from '@/components/content/ChapterNav';
 import { ArrowLeft, BookOpen } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -105,8 +106,10 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
 
         {/* MDX Body with Embedded Components */}
         <MdxRenderer source={chapter.content} lang={lang} slug={slug} />
+
+        {/* Bottom Navigation & Reading Progress Tracker */}
+        <ChapterNav currentSlug={slug} lang={lang} />
       </div>
     </div>
   );
 }
-
