@@ -286,6 +286,154 @@ export const CHAPTER_QUIZZES: Record<string, Record<Locale, QuizQuestion[]>> = {
       },
     ],
   },
+  'linked-list': {
+    bn: [
+      {
+        question: 'গুপ্তধন খোঁজায় ৫ নম্বর চিরকুটে কীভাবে পৌঁছাবেন?',
+        options: [
+          {
+            text: 'নম্বর ধরে সরাসরি লাফ দিয়ে',
+            isCorrect: false,
+            explanation:
+              'না, লিংকড লিস্টে কোনো ইনডেক্স ধরে সরাসরি লাফ দেওয়া যায় না। প্রতিটি নোড শুধু পরেরটার ঠিকানা জানে।',
+          },
+          {
+            text: 'প্রথম চিরকুট থেকে শুরু করে লিংক ধরে এগিয়ে',
+            isCorrect: true,
+            explanation:
+              'সঠিক! ৫ নম্বর চিরকুট কোথায়, তা জানে শুধু ৪ নম্বর চিরকুট, তাই শুরু (হেড) থেকে শিকল ধরে একটার পর একটা লিংক পার হতে হবে।',
+          },
+          {
+            text: '৫ নম্বর চিরকুটকেই জিজ্ঞেস করে',
+            isCorrect: false,
+            explanation:
+              '৫ নম্বর চিরকুট কোথায় আছে তা আপনি পৌঁছানোর আগে তাকে জিজ্ঞেস করার কোনো সুযোগ নেই।',
+          },
+        ],
+      },
+      {
+        question:
+          '"আমগাছ" আর "পানির ট্যাংক"-এর মাঝখানে "রান্নাঘর" ঢোকালেন। আগে থেকে থাকা কয়টি চিরকুট বদলাতে হলো?',
+        options: [
+          {
+            text: 'আমগাছের পরের সবগুলো চিরকুট',
+            isCorrect: false,
+            explanation:
+              'না, অ্যারের মতো এখানে কাউকে সরাতে হয় না বা পেছনের কারও লিংক বদলাতে হয় না।',
+          },
+          {
+            text: 'শুধু আমগাছের চিরকুটটা',
+            isCorrect: true,
+            explanation:
+              'একেবারে সঠিক! নতুন চিরকুট নিজে পানির ট্যাংকের দিকে তাকায়, আর আমগাছের পুরোনো চিরকুটটি এখন রান্নাঘরের দিকে তাকায়। আগে থেকে থাকা বাকি কোনো চিরকুটকে ছুঁতেও হয় না।',
+          },
+          {
+            text: 'একটাও না',
+            isCorrect: false,
+            explanation:
+              'অন্তত একটি চিরকুট বদলাতেই হবে, নইলে আমগাছের পর রান্নাঘরে যাওয়ার কোনো লিংক তৈরি হবে না।',
+          },
+        ],
+      },
+      {
+        question:
+          '৫০০ নম্বর জিনিসটা বারবার সবচেয়ে দ্রুত পড়তে হবে। কোনটা ভালো?',
+        options: [
+          {
+            text: 'লিংকড লিস্ট',
+            isCorrect: false,
+            explanation:
+              'না, লিংকড লিস্টে ৫০০ নম্বর জিনিসে পৌঁছাতে প্রতিবারই শুরু থেকে ৪৯৯টি হপ বা লিংক পার হতে হবে।',
+          },
+          {
+            text: 'অ্যারে',
+            isCorrect: true,
+            explanation:
+              'চমৎকার! অ্যারে যেকোনো অবস্থান মেমরি সূত্র দিয়ে সরাসরি ১ ধাপে (O(1)) পড়তে পারে, যেখানে লিংকড লিস্টে লাগে ৪৯৯টি হপ।',
+          },
+          {
+            text: 'দুটোই সমান',
+            isCorrect: false,
+            explanation:
+              'মোটেই সমান নয়—অ্যারে ১ ধাপে পড়বে এবং লিংকড লিস্টে ৪৯৯টি ধাপ পার হতে হবে।',
+          },
+        ],
+      },
+    ],
+    en: [
+      {
+        question: 'How do you reach the 5th clue in the treasure hunt?',
+        options: [
+          {
+            text: 'Jump straight to it using its number',
+            isCorrect: false,
+            explanation:
+              'No, in a linked list there are no numbered slots to jump to; each node only points to the next.',
+          },
+          {
+            text: 'Start at the first clue and follow the links',
+            isCorrect: true,
+            explanation:
+              'Correct! Only the 4th clue knows where the 5th one is, so you must follow the chain from the start (the head).',
+          },
+          {
+            text: 'Ask the 5th clue where it is',
+            isCorrect: false,
+            explanation:
+              'You cannot talk to the 5th clue before finding it!',
+          },
+        ],
+      },
+      {
+        question:
+          'You insert "Kitchen" between "Mango tree" and "Water tank". How many existing clues must be changed?',
+        options: [
+          {
+            text: 'All the clues after the mango tree',
+            isCorrect: false,
+            explanation:
+              'No, unlike arrays, subsequent items do not shift or change memory addresses.',
+          },
+          {
+            text: "Only the mango tree's clue",
+            isCorrect: true,
+            explanation:
+              "Spot on! The new clue points to the water tank, and the mango tree's clue now points to the kitchen. Nobody else changes.",
+          },
+          {
+            text: 'None',
+            isCorrect: false,
+            explanation:
+              "At least one existing clue's pointer must change to link the new node into the chain.",
+          },
+        ],
+      },
+      {
+        question:
+          'You need to read item number 500 as fast as possible, again and again. Which is better?',
+        options: [
+          {
+            text: 'A linked list',
+            isCorrect: false,
+            explanation:
+              'No, a linked list must traverse 499 hops from the head every single time.',
+          },
+          {
+            text: 'An array',
+            isCorrect: true,
+            explanation:
+              'Exactly right! An array reads any position in 1 step (O(1)) via direct address calculation; a linked list needs 499 hops.',
+          },
+          {
+            text: 'Both are the same',
+            isCorrect: false,
+            explanation:
+              'They are very different: 1 step vs 499 hops!',
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export function getChapterQuiz(slug: string, lang: Locale): QuizQuestion[] {

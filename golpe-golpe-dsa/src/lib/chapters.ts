@@ -30,11 +30,11 @@ export const CHAPTERS: ChapterMeta[] = [
   {
     order: 3,
     slug: 'linked-list',
-    status: 'soon',
+    status: 'ready',
     titleBn: 'লিংকড লিস্ট (Linked List)',
     titleEn: 'Linked List',
-    hookBn: 'একটি চিরকুটের সূত্র ধরে পরেরটিতে পৌঁছানোর গুপ্তধন সন্ধান',
-    hookEn: 'A treasure hunt where each clue leads to the next',
+    hookBn: 'চিরকুটের সূত্র ধরে গুপ্তধন সন্ধান',
+    hookEn: 'A treasure hunt with clues',
   },
   {
     order: 4,

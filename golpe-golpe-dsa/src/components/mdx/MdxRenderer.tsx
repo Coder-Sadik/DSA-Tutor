@@ -6,6 +6,7 @@ import { CodeTabs } from '@/components/content/CodeTabs';
 import { Quiz } from '@/components/content/Quiz';
 import { BookSearchLab } from '@/components/labs/BookSearchLab';
 import { LockerArrayLab } from '@/components/labs/LockerArrayLab';
+import { ClueChainLab } from '@/components/labs/ClueChainLab';
 import { Locale } from '@/lib/i18n/config';
 import { getChapterQuiz } from '@/lib/quizzes';
 import { getChapterCode } from '@/lib/codeSnippets';
@@ -35,6 +36,7 @@ export function MdxRenderer({ source, lang, slug }: MdxRendererProps) {
     },
     BookSearchLab: () => <BookSearchLab lang={lang} />,
     LockerArrayLab: () => <LockerArrayLab lang={lang} />,
+    ClueChainLab: () => <ClueChainLab lang={lang} />,
     Quiz: (props: any) => {
       const questions =
         props.questions && props.questions.length > 0

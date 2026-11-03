@@ -508,3 +508,4 @@ export function LockerArrayLab({ lang }: LockerArrayLabProps) {
     </LabWrapper>
   );
 }
+
