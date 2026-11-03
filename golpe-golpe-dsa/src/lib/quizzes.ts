@@ -152,9 +152,142 @@ export const CHAPTER_QUIZZES: Record<string, Record<Locale, QuizQuestion[]>> = {
       },
     ],
   },
+  array: {
+    bn: [
+      {
+        question: 'অ্যারেতে গোনা ০ থেকে শুরু হয় কেন?',
+        options: [
+          {
+            text: 'কম্পিউটার ১ পছন্দ করে না',
+            isCorrect: false,
+            explanation: 'না, কম্পিউটার যে কোনো সংখ্যা গণনা করতে পারে।',
+          },
+          {
+            text: 'ইনডেক্স হলো শুরু থেকে দূরত্ব, আর প্রথম জিনিস শুরু থেকে ০ ধাপ দূরে',
+            isCorrect: true,
+            explanation:
+              'সঠিক! ইনডেক্স নির্দেশ করে শুরুর দেয়াল বা অবস্থান থেকে কত ঘর সামনে এগোতে হবে। প্রথম উপাদানটি শুরুর অবস্থানেই থাকে, তাই তার দূরত্ব ০।',
+          },
+          {
+            text: 'প্রথম লকারটা ভাঙা',
+            isCorrect: false,
+            explanation: 'না, এটি বাস্তবসম্মত কোনো কারণ নয়।',
+          },
+        ],
+      },
+      {
+        question: '১০,০০,০০০টি লকারের সারিতে ৫৭ নম্বর লকার খুলতে কত ধাপ লাগে?',
+        options: [
+          {
+            text: '৫৭টি ধাপ',
+            isCorrect: false,
+            explanation: '৫৭টি ধাপ লাগত যদি একটি একটি করে হেঁটে দেখতে হতো।',
+          },
+          {
+            text: '১০,০০,০০০টি ধাপ',
+            isCorrect: false,
+            explanation: '১০ লাখ ধাপ কখনোই লাগবে না।',
+          },
+          {
+            text: 'মাত্র ১টি ধাপ',
+            isCorrect: true,
+            explanation:
+              'অসাধারণ! অ্যারেতে ইনডেক্স জানা থাকলে মেমরি সরাসরি সেই ঠিকানায় লাফ দেয়। সারিতে ১০টি উপাদান থাক বা ১ কোটি, সময় সবসময় ধ্রুব বা ১ ধাপ।',
+          },
+        ],
+      },
+      {
+        question:
+          '০ থেকে ৬ নম্বর লকারে ৭ জন ছাত্র আছে। ০ নম্বর লকারে নতুন একজনকে বসাতে কতজনকে সরতে হবে?',
+        options: [
+          {
+            text: '০ জন',
+            isCorrect: false,
+            explanation: '০ নম্বরে জায়গা করতে হলে কাউকে না কাউকে সরাতেই হবে।',
+          },
+          {
+            text: '৭ জন',
+            isCorrect: true,
+            explanation:
+              'একদম ঠিক! ০ থেকে ৬ পর্যন্ত থাকা ৭ জন ছাত্রের প্রত্যেককে ১ ঘর করে ডানে (১ থেকে ৭ এ) সরতে হবে।',
+          },
+          {
+            text: '১ জন',
+            isCorrect: false,
+            explanation: 'শুধু ১ জনকে সরালে বাকিদের সাথে জায়গা ধাক্কাধাক্কি লেগে যাবে।',
+          },
+        ],
+      },
+    ],
+    en: [
+      {
+        question: 'Why does an array start counting at 0?',
+        options: [
+          {
+            text: 'Because computers dislike 1',
+            isCorrect: false,
+            explanation: 'No, computers have no emotional preference for numbers!',
+          },
+          {
+            text: 'Because the index is the distance from the start, and the first item is 0 steps away',
+            isCorrect: true,
+            explanation:
+              'Correct! An index measures memory offset (distance) from the starting address. The very first element is at offset 0.',
+          },
+          {
+            text: 'Because the first locker is broken',
+            isCorrect: false,
+            explanation: 'No, all lockers in memory work fine!',
+          },
+        ],
+      },
+      {
+        question: 'A row has 1,000,000 lockers. How many steps to open locker 57?',
+        options: [
+          {
+            text: '57 steps',
+            isCorrect: false,
+            explanation: '57 steps would be linear traversal, not direct indexing.',
+          },
+          {
+            text: '1,000,000 steps',
+            isCorrect: false,
+            explanation: 'You do not have to check the whole row.',
+          },
+          {
+            text: '1 step',
+            isCorrect: true,
+            explanation:
+              'Exactly right! With the index in hand, direct access computes the memory address instantly in 1 step (O(1)).',
+          },
+        ],
+      },
+      {
+        question:
+          '7 students are in lockers 0 to 6. How many students must move to put a new student in locker 0?',
+        options: [
+          {
+            text: '0 students',
+            isCorrect: false,
+            explanation: 'Locker 0 is currently occupied, so someone must move.',
+          },
+          {
+            text: '7 students',
+            isCorrect: true,
+            explanation:
+              'Spot on! All 7 students currently occupying indices 0 through 6 must shift right by one locker to make room at index 0.',
+          },
+          {
+            text: '1 student',
+            isCorrect: false,
+            explanation: 'Shifting only 1 student would overwrite locker 1.',
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export function getChapterQuiz(slug: string, lang: Locale): QuizQuestion[] {
   return CHAPTER_QUIZZES[slug]?.[lang] || [];
 }
-

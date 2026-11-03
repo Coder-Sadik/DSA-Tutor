@@ -21,7 +21,7 @@ export const CHAPTERS: ChapterMeta[] = [
   {
     order: 2,
     slug: 'array',
-    status: 'soon',
+    status: 'ready',
     titleBn: 'অ্যারে (Array)',
     titleEn: 'Array',
     hookBn: 'সারিবদ্ধ নম্বর দেওয়া লকারের গল্প',
@@ -100,4 +100,3 @@ export const CHAPTERS: ChapterMeta[] = [
     hookEn: 'Russian nesting dolls and remembering previously solved answers',
   },
 ];
-

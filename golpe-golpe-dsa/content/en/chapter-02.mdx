@@ -2,7 +2,70 @@
 order: 2
 slug: "array"
 title: "Array"
-storyHook: "A row of numbered school lockers"
-status: "soon"
+storyHook: "A row of numbered lockers"
+status: "ready"
 ---
 
+<Story>
+Rafi and Nila's school put a new row of ten green lockers along the veranda, side by side. Computer Sir told the carpenter, "Number them 0, 1, 2, up to 9."
+
+"Zero?" said Rafi. "Who starts counting from zero?"
+
+Sir smiled. "Computers do. A locker's number tells you how many lockers to walk past from the wall. The first locker touches the wall, so it is 0."
+
+The next morning Rafi was given locker 3. He asked nobody. He opened no other doors. He walked past three lockers from the wall and stood in front of the fourth door. One try.
+
+A few days later a new student, Tania, joined. Sir wanted her at locker 2, near her friends. But lockers 2 to 6 were already in use. Karim Chacha, the school helper, had to move everyone's things one locker to the right: 6 to 7, then 5 to 6, and so on down to 2. Five moves! Only then was locker 2 free for Tania.
+
+"Opening a locker is always one step," said Sir. "But squeezing someone into the middle means moving many people. And if all ten lockers were full, there would be no space at all. We would have to build a longer row."
+</Story>
+
+### Why is it quick to find, slow to squeeze in?
+
+Rafi's locker is not found by searching door by door. It is found simply by counting a distance from the start. That is exactly how an array works.
+
+<Definition term="Array">
+An Array is a row of items stored side by side in memory. Each place has a number called an index, and counting starts at 0, because the index represents the distance (offset) from the start.
+</Definition>
+
+### Four Key Facts About Arrays
+
+* **Direct access:** With the index you jump straight to the item. 1 step, whether there are 10 lockers or 10 million.
+* **Fixed size:** The row is built with a set number of places.
+* **The end is cheap:** Adding or removing at the end moves nobody.
+* **The middle is costly:** Inserting or removing in the middle shifts everyone after it.
+
+### Connection to Chapter 1
+
+Remember Nila's shelf from Chapter 1? She could put her hand on the middle book straight away without scanning from the beginning. That jump is only possible because books on a shelf work like an array, with numbered positions. That is why binary search requires an array or indexed storage!
+
+<Remember title="For the Grown-ups (A Quick Note on Complexity)">
+* **Direct access:** Known as $O(1)$ (constant time)—it always takes the exact same single step.
+* **Shifting items:** Inserting or deleting in the middle is $O(n)$, where $n$ is the number of items that must shift.
+* We'll explore formal Big-O notation thoroughly in a later chapter!
+</Remember>
+
+<LockerArrayLab />
+
+### Real-World Uses
+
+* **Bus seat numbers:** Seat 7 takes you straight to the right place without checking every passenger's seat.
+* **Days of a month in a calendar app:** Day 15 is looked up directly by its position in the month's array.
+* **Photo pixels:** A digital photograph is a grid of pixels stored in numbered positions, allowing your phone to recolor pixel number 5,000 in a microsecond.
+* **Music playlist tracks:** Jumping directly to track #4 on an album.
+
+### How It Looks in Code
+
+<CodeTabs />
+
+<Remember title="3 Key Takeaways to Remember">
+* **Row of items:** An array is a row of items; the index (starting at 0) is the distance from the start.
+* **Instant reading:** Reading by index is always one step ($O(1)$).
+* **Cost of the middle:** Inserting or removing in the middle means shifting many items; adding or removing at the end is cheap.
+</Remember>
+
+<Quiz />
+
+### What's Next?
+
+What if the lockers are not in a neat row at all, and each one only holds a clue about where the next one is hidden? In Chapter 3, we'll embark on a treasure hunt with the **Linked List**!

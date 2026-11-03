@@ -7,3 +7,4 @@ import OpenGraphImage, {
 
 export { size, contentType, alt, generateStaticParams };
 export default OpenGraphImage;
+

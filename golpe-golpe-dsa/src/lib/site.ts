@@ -5,3 +5,4 @@ export function getFullUrl(path = ''): string {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${SITE_URL}${cleanPath}`;
 }
+
